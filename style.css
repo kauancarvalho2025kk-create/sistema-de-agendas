@@ -1,0 +1,1022 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CORES DO TEMA ESCURO
+========================= */
+
+:root {
+
+    --bg: #111827;
+
+    --bg-secondary: #1f2937;
+
+    --card: rgba(255,255,255,0.08);
+
+    --card-border: rgba(255,255,255,0.15);
+
+    --text: #ffffff;
+
+    --text-secondary: #cbd5e1;
+
+    --text-muted: #94a3b8;
+
+    --input-bg: rgba(255,255,255,0.08);
+
+    --input-border: rgba(255,255,255,0.20);
+
+    --navbar: rgba(17,24,39,0.95);
+
+    --primary: #8b5cf6;
+
+    --secondary: #ec4899;
+
+    --success: #22c55e;
+
+    --danger: #ef4444;
+
+    --shadow: rgba(0,0,0,0.35);
+}
+
+
+/* =========================
+   TEMA CLARO
+========================= */
+
+body.light {
+
+    --bg: #f3f4f6;
+
+    --bg-secondary: #ffffff;
+
+    --card: #ffffff;
+
+    --card-border: #e5e7eb;
+
+    --text: #111827;
+
+    --text-secondary: #374151;
+
+    --text-muted: #6b7280;
+
+    --input-bg: #ffffff;
+
+    --input-border: #d1d5db;
+
+    --navbar: rgba(255,255,255,0.95);
+
+    --shadow: rgba(0,0,0,0.10);
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(139,92,246,0.25),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(236,72,153,0.20),
+            transparent 30%
+        ),
+        var(--bg);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+strong,
+label,
+td,
+th {
+
+    color: var(--text);
+}
+
+p {
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-page {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.login-container {
+
+    width: 100%;
+
+    max-width: 440px;
+}
+
+
+.login-box {
+
+    padding: 40px;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--card-border);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 60px var(--shadow);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.logo-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: auto;
+
+    margin-bottom: 12px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    font-size: 30px;
+}
+
+
+.logo h1 {
+
+    color: var(--text);
+
+    font-size: 26px;
+}
+
+
+.logo p {
+
+    margin-top: 7px;
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+.form-description {
+
+    margin-bottom: 25px;
+
+    color: var(--text-secondary);
+}
+
+
+label {
+
+    display: block;
+
+    margin-top: 15px;
+
+    margin-bottom: 7px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 14px;
+
+    border:
+        1px solid var(--input-border);
+
+    border-radius: 10px;
+
+    background: var(--input-bg);
+
+    color: var(--text);
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+input::placeholder {
+
+    color: var(--text-muted);
+}
+
+
+input:focus,
+select:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(139,92,246,0.15);
+}
+
+
+select option {
+
+    background: var(--bg-secondary);
+
+    color: var(--text);
+}
+
+
+/* =========================
+   SENHA
+========================= */
+
+.password-input {
+
+    position: relative;
+}
+
+
+.password-input input {
+
+    padding-right: 50px;
+}
+
+
+.password-input button {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
+
+.primary-button {
+
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 25px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: #ffffff !important;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.primary-button:hover {
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   TROCAR LOGIN/CADASTRO
+========================= */
+
+.switch-text {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: var(--text-secondary);
+}
+
+
+.switch-text button {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--primary);
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   MENSAGENS
+========================= */
+
+#mensagem {
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+.sucesso {
+
+    color: #16a34a !important;
+}
+
+
+.erro {
+
+    color: #dc2626 !important;
+}
+
+
+/* =========================
+   ESCONDIDO
+========================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 100%;
+
+    padding: 18px 6%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: var(--navbar);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom:
+        1px solid var(--card-border);
+}
+
+
+.brand {
+
+    color: var(--text);
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.nav-links a {
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    color: var(--text-secondary);
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.nav-links a:hover {
+
+    background: var(--card);
+
+    color: var(--text);
+}
+
+
+/* =========================
+   ÁREA DO USUÁRIO
+========================= */
+
+.user-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.user-name {
+
+    color: var(--text);
+}
+
+
+/* =========================
+   BOTÃO TEMA
+========================= */
+
+.theme-selector {
+
+    position: relative;
+}
+
+
+.theme-button {
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border:
+        1px solid var(--card-border);
+
+    border-radius: 10px;
+
+    background: var(--card);
+
+    color: var(--text) !important;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.theme-button:hover {
+
+    transform: translateY(-1px);
+
+    background: var(--input-bg);
+}
+
+
+/* =========================
+   MENU DE TEMAS
+========================= */
+
+.theme-menu {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 48px;
+
+    width: 180px;
+
+    padding: 8px;
+
+    background: var(--bg-secondary);
+
+    border:
+        1px solid var(--card-border);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px var(--shadow);
+
+    z-index: 1000;
+}
+
+
+.theme-menu button {
+
+    width: 100%;
+
+    padding: 11px 12px;
+
+    display: block;
+
+    text-align: left;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--text) !important;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+.theme-menu button:hover {
+
+    background: var(--input-bg);
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout {
+
+    border: none;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    background: var(--danger);
+
+    color: #ffffff !important;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.main {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+
+.welcome {
+
+    margin-bottom: 30px;
+}
+
+
+.welcome h1 {
+
+    color: var(--text);
+
+    font-size: 34px;
+}
+
+
+.welcome p {
+
+    margin-top: 8px;
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.card {
+
+    padding: 23px;
+
+    border-radius: 18px;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--card-border);
+
+    box-shadow:
+        0 10px 30px var(--shadow);
+}
+
+
+.card-icon {
+
+    font-size: 25px;
+}
+
+
+.card-title {
+
+    margin-top: 12px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+
+.card-number {
+
+    margin-top: 5px;
+
+    color: var(--text);
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   PAINEL
+========================= */
+
+.panel {
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--card-border);
+
+    box-shadow:
+        0 10px 30px var(--shadow);
+}
+
+
+.panel h2 {
+
+    color: var(--text);
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   TABELAS
+========================= */
+
+.table-container {
+
+    overflow-x: auto;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+th,
+td {
+
+    padding: 15px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid var(--card-border);
+}
+
+
+th {
+
+    color: var(--primary);
+}
+
+
+td {
+
+    color: var(--text);
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.status-livre {
+
+    background:
+        rgba(34,197,94,0.15);
+
+    color: #16a34a !important;
+}
+
+
+.status-cheio {
+
+    background:
+        rgba(239,68,68,0.15);
+
+    color: #dc2626 !important;
+}
+
+
+/* =========================
+   AVISOS
+========================= */
+
+.aviso {
+
+    padding: 16px;
+
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+
+    background: var(--input-bg);
+
+    border-left:
+        4px solid var(--primary);
+}
+
+
+.aviso p {
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.button {
+
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 9px;
+
+    color: white !important;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.button-primary {
+
+    background: var(--primary);
+}
+
+
+.button-danger {
+
+    background: var(--danger);
+}
+
+
+.button-success {
+
+    background: var(--success);
+}
+
+
+/* =========================
+   GRID DE FORMULÁRIO
+========================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+
+.form-group {
+
+    margin-bottom: 10px;
+}
+
+
+.form-group label {
+
+    margin-top: 0;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width: 900px) {
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .nav-links {
+
+        display: none;
+    }
+}
+
+
+@media(max-width: 600px) {
+
+    .cards {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .login-box {
+
+        padding: 28px 20px;
+    }
+
+
+    .navbar {
+
+        padding: 15px 20px;
+    }
+
+
+    .user-name {
+
+        display: none;
+    }
+}

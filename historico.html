@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Histórico - Reserva Escolar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="brand">
+            📚 Reserva Escolar
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="reservas.html">
+                Agenda
+            </a>
+
+            <a href="historico.html">
+                Histórico
+            </a>
+
+            <a href="perfil.html">
+                Perfil
+            </a>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <strong id="nomeUsuario"></strong>
+
+
+            <div class="theme-selector">
+
+                <button
+                    class="theme-button"
+                    onclick="abrirTemas()"
+                >
+                    🎨 Tema
+                </button>
+
+
+                <div
+                    id="themeMenu"
+                    class="theme-menu hidden"
+                >
+
+                    <button
+                        onclick="escolherTema('light')"
+                    >
+                        ☀️ Tema Claro
+                    </button>
+
+
+                    <button
+                        onclick="escolherTema('dark')"
+                    >
+                        🌙 Tema Escuro
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout"
+                onclick="sair()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="main">
+
+        <div class="welcome">
+
+            <h1>
+                📜 Histórico de Reservas
+            </h1>
+
+            <p>
+                Consulte todas as reservas realizadas pela sua conta.
+            </p>
+
+        </div>
+
+
+        <section class="panel">
+
+            <div
+                class="table-container"
+                id="historico"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+
+    <script>
+
+        const usuario =
+            protegerPagina();
+
+
+        if (usuario) {
+
+            document.getElementById(
+                "nomeUsuario"
+            ).textContent =
+                usuario.nick;
+
+
+            const reservas =
+                getReservas().filter(
+                    function(r) {
+
+                        return (
+                            r.email ===
+                            usuario.email
+                        );
+
+                    }
+                );
+
+
+            const area =
+                document.getElementById(
+                    "historico"
+                );
+
+
+            if (
+                reservas.length === 0
+            ) {
+
+                area.innerHTML =
+                    "<p>Você ainda não possui reservas.</p>";
+
+            } else {
+
+                area.innerHTML = `
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Recurso</th>
+
+                                <th>Data</th>
+
+                                <th>Horário</th>
+
+                                <th>Usuário</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${reservas.map(
+                                function(r) {
+
+                                    return `
+
+                                        <tr>
+
+                                            <td>
+                                                ${r.recurso}
+                                            </td>
+
+                                            <td>
+                                                ${r.data
+                                                    .split("-")
+                                                    .reverse()
+                                                    .join("/")}
+                                            </td>
+
+                                            <td>
+                                                ${r.horario}
+                                            </td>
+
+                                            <td>
+                                                ${r.nick}
+                                            </td>
+
+                                        </tr>
+
+                                    `;
+
+                                }
+                            ).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                `;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

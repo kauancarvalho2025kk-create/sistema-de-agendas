@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Agenda - Reserva Escolar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="brand">
+            📚 Reserva Escolar
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="reservas.html">
+                Agenda
+            </a>
+
+            <a href="historico.html">
+                Histórico
+            </a>
+
+            <a href="perfil.html">
+                Perfil
+            </a>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <strong id="nomeUsuario"></strong>
+
+
+            <div class="theme-selector">
+
+                <button
+                    class="theme-button"
+                    onclick="abrirTemas()"
+                >
+                    🎨 Tema
+                </button>
+
+
+                <div
+                    id="themeMenu"
+                    class="theme-menu hidden"
+                >
+
+                    <button
+                        onclick="escolherTema('light')"
+                    >
+                        ☀️ Tema Claro
+                    </button>
+
+
+                    <button
+                        onclick="escolherTema('dark')"
+                    >
+                        🌙 Tema Escuro
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout"
+                onclick="sair()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="main">
+
+        <div class="welcome">
+
+            <h1>
+                📅 Agenda de Reservas
+            </h1>
+
+            <p>
+                Escolha uma data e veja a disponibilidade.
+            </p>
+
+        </div>
+
+
+        <section class="panel">
+
+            <h2>
+                1. Escolha a data
+            </h2>
+
+
+            <label for="data">
+                Data da reserva
+            </label>
+
+
+            <input
+                type="date"
+                id="data"
+            >
+
+        </section>
+
+
+        <section class="panel">
+
+            <h2>
+                2. Disponibilidade
+            </h2>
+
+
+            <div
+                class="table-container"
+                id="agenda"
+            >
+
+                <p>
+                    Escolha uma data para visualizar os horários.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <h2>
+                3. Nova reserva
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="recurso">
+                        Recurso
+                    </label>
+
+
+                    <select id="recurso">
+
+                        <option value="">
+                            Selecione o recurso
+                        </option>
+
+                        <option value="Data Show">
+                            📽️ Data Show
+                        </option>
+
+                        <option value="Sala de Informática">
+                            💻 Sala de Informática
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="horarioReserva">
+                        Horário
+                    </label>
+
+
+                    <select id="horarioReserva">
+
+                        <option value="">
+                            Selecione o horário
+                        </option>
+
+                        <option>
+                            07:30 - 08:30
+                        </option>
+
+                        <option>
+                            08:30 - 09:30
+                        </option>
+
+                        <option>
+                            09:50 - 10:50
+                        </option>
+
+                        <option>
+                            10:50 - 11:50
+                        </option>
+
+                        <option>
+                            12:50 - 13:50
+                        </option>
+
+                        <option>
+                            13:50 - 14:50
+                        </option>
+
+                        <option>
+                            15:10 - 16:10
+                        </option>
+
+                        <option>
+                            16:10 - 17:10
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="button button-primary"
+                style="margin-top:20px"
+                onclick="fazerReserva()"
+            >
+                📅 Fazer reserva
+            </button>
+
+
+            <div id="mensagem"></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+
+    <script>
+
+        const usuario =
+            protegerPagina();
+
+
+        if (usuario) {
+
+            document.getElementById(
+                "nomeUsuario"
+            ).textContent =
+                usuario.nick;
+
+        }
+
+
+        const dataInput =
+            document.getElementById(
+                "data"
+            );
+
+
+        dataInput.min =
+            getHoje();
+
+
+        dataInput.max =
+            getAmanha();
+
+
+        const horarios = [
+
+            "07:30 - 08:30",
+
+            "08:30 - 09:30",
+
+            "09:50 - 10:50",
+
+            "10:50 - 11:50",
+
+            "12:50 - 13:50",
+
+            "13:50 - 14:50",
+
+            "15:10 - 16:10",
+
+            "16:10 - 17:10"
+
+        ];
+
+
+        dataInput.addEventListener(
+            "change",
+            atualizarAgenda
+        );
+
+
+        function atualizarAgenda() {
+
+            const data =
+                dataInput.value;
+
+
+            const area =
+                document.getElementById(
+                    "agenda"
+                );
+
+
+            if (!data) {
+
+                area.innerHTML =
+                    "<p>Escolha uma data.</p>";
+
+                return;
+
+            }
+
+
+            if (!dataPermitida(data)) {
+
+                area.innerHTML =
+                    "<p>Você só pode reservar para hoje ou amanhã.</p>";
+
+                return;
+
+            }
+
+
+            const reservas =
+                getReservas();
+
+
+            area.innerHTML = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Horário</th>
+
+                            <th>Data Shows</th>
+
+                            <th>Sala de Informática</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${horarios.map(
+                            function(horario) {
+
+                                const dataShows =
+                                    reservas.filter(
+                                        function(r) {
+
+                                            return (
+                                                r.data === data &&
+                                                r.horario === horario &&
+                                                r.recurso === "Data Show"
+                                            );
+
+                                        }
+                                    ).length;
+
+
+                                const sala =
+                                    reservas.filter(
+                                        function(r) {
+
+                                            return (
+                                                r.data === data &&
+                                                r.horario === horario &&
+                                                r.recurso === "Sala de Informática"
+                                            );
+
+                                        }
+                                    ).length;
+
+
+                                return `
+
+                                    <tr>
+
+                                        <td>
+                                            ${horario}
+                                        </td>
+
+
+                                        <td>
+
+                                            <span class="status ${
+                                                dataShows >= 5
+                                                ? "status-cheio"
+                                                : "status-livre"
+                                            }">
+
+                                                ${dataShows}/5
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <span class="status ${
+                                                sala >= 1
+                                                ? "status-cheio"
+                                                : "status-livre"
+                                            }">
+
+                                                ${
+                                                    sala >= 1
+                                                    ? "Reservada"
+                                                    : "Livre"
+                                                }
+
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                            }
+                        ).join("")}
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+        }
+
+
+        function fazerReserva() {
+
+            const data =
+                dataInput.value;
+
+
+            const recurso =
+                document.getElementById(
+                    "recurso"
+                ).value;
+
+
+            const horario =
+                document.getElementById(
+                    "horarioReserva"
+                ).value;
+
+
+            if (
+                !data ||
+                !recurso ||
+                !horario
+            ) {
+
+                mostrarMensagem(
+                    "Preencha todos os campos.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !dataPermitida(data)
+            ) {
+
+                mostrarMensagem(
+                    "Só é possível reservar hoje ou amanhã.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            const horariosPermitidos =
+                horarios.includes(
+                    horario
+                );
+
+
+            if (
+                !horariosPermitidos
+            ) {
+
+                mostrarMensagem(
+                    "Este horário não está disponível para reservas.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            const reservas =
+                getReservas();
+
+
+            const quantidade =
+                reservas.filter(
+                    function(r) {
+
+                        return (
+                            r.data === data &&
+                            r.horario === horario &&
+                            r.recurso === recurso
+                        );
+
+                    }
+                ).length;
+
+
+            if (
+                recurso === "Data Show" &&
+                quantidade >= 5
+            ) {
+
+                mostrarMensagem(
+                    "Este horário já possui 5 Data Shows.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                recurso === "Sala de Informática" &&
+                quantidade >= 1
+            ) {
+
+                mostrarMensagem(
+                    "A Sala de Informática já está reservada.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            const reserva = {
+
+                id: Date.now(),
+
+                data: data,
+
+                horario: horario,
+
+                recurso: recurso,
+
+                nick: usuario.nick,
+
+                email: usuario.email,
+
+                criadoEm:
+                    new Date().toISOString()
+
+            };
+
+
+            reservas.push(
+                reserva
+            );
+
+
+            salvarReservas(
+                reservas
+            );
+
+
+            mostrarMensagem(
+                "Reserva realizada com sucesso!",
+                "sucesso"
+            );
+
+
+            atualizarAgenda();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

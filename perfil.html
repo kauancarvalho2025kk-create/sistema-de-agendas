@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Perfil - Reserva Escolar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="brand">
+            📚 Reserva Escolar
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="reservas.html">
+                Agenda
+            </a>
+
+            <a href="historico.html">
+                Histórico
+            </a>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <div class="theme-selector">
+
+                <button
+                    class="theme-button"
+                    onclick="abrirTemas()"
+                >
+                    🎨 Tema
+                </button>
+
+
+                <div
+                    id="themeMenu"
+                    class="theme-menu hidden"
+                >
+
+                    <button
+                        onclick="escolherTema('light')"
+                    >
+                        ☀️ Tema Claro
+                    </button>
+
+
+                    <button
+                        onclick="escolherTema('dark')"
+                    >
+                        🌙 Tema Escuro
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout"
+                onclick="sair()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="main">
+
+        <div class="welcome">
+
+            <h1>
+                👤 Meu Perfil
+            </h1>
+
+            <p>
+                Informações da sua conta.
+            </p>
+
+        </div>
+
+
+        <section class="panel">
+
+            <h2>
+                Dados da conta
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Nick
+                    </label>
+
+                    <input
+                        id="nick"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        E-mail
+                    </label>
+
+                    <input
+                        id="email"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Tipo de conta
+                    </label>
+
+                    <input
+                        id="tipo"
+                        readonly
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+
+    <script>
+
+        const usuario =
+            protegerPagina();
+
+
+        if (usuario) {
+
+            document.getElementById(
+                "nick"
+            ).value =
+                usuario.nick;
+
+
+            document.getElementById(
+                "email"
+            ).value =
+                usuario.email;
+
+
+            document.getElementById(
+                "tipo"
+            ).value =
+                usuario.role === "admin"
+                ? "Administrador"
+                : "Professor";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -21,435 +21,521 @@
 
 <body>
 
-    <nav class="navbar">
+<nav class="navbar">
 
-        <div class="brand">
-            📚 Reserva Escolar
-        </div>
+    <div class="brand">
+        📚 Reserva Escolar
+    </div>
 
+    <div class="nav-links">
 
-        <div class="nav-links">
+        <a href="home.html">
+            Início
+        </a>
 
-            <a href="home.html">
-                Início
-            </a>
+        <a href="reservas.html">
+            Agenda
+        </a>
 
-            <a href="reservas.html">
-                Agenda
-            </a>
+        <a href="historico.html">
+            Histórico
+        </a>
 
-            <a href="historico.html">
-                Histórico
-            </a>
+        <a href="perfil.html">
+            Perfil
+        </a>
 
-            <a href="perfil.html">
-                Perfil
-            </a>
+        <a
+            href="admin.html"
+            id="linkAdmin"
+            class="hidden"
+        >
+            Administração
+        </a>
 
-            <a
-                href="admin.html"
-                id="linkAdmin"
-                class="hidden"
+    </div>
+
+    <div class="user-area">
+
+        <span class="user-name">
+            Olá,
+            <strong id="nomeUsuario"></strong>
+        </span>
+
+        <div class="theme-selector">
+
+            <button
+                class="theme-button"
+                onclick="abrirTemas()"
             >
-                Administração
-            </a>
+                🎨 Tema
+            </button>
 
-        </div>
-
-
-        <div class="user-area">
-
-            <span class="user-name">
-
-                Olá,
-                <strong id="nomeUsuario"></strong>
-
-            </span>
-
-
-            <div class="theme-selector">
+            <div
+                id="themeMenu"
+                class="theme-menu hidden"
+            >
 
                 <button
-                    class="theme-button"
-                    onclick="abrirTemas()"
+                    onclick="escolherTema('light')"
                 >
-                    🎨 Tema
+                    ☀️ Tema Claro
                 </button>
 
-
-                <div
-                    id="themeMenu"
-                    class="theme-menu hidden"
+                <button
+                    onclick="escolherTema('dark')"
                 >
-
-                    <button
-                        onclick="escolherTema('light')"
-                    >
-                        ☀️ Tema Claro
-                    </button>
-
-
-                    <button
-                        onclick="escolherTema('dark')"
-                    >
-                        🌙 Tema Escuro
-                    </button>
-
-                </div>
+                    🌙 Tema Escuro
+                </button>
 
             </div>
 
+        </div>
+
+        <button
+            class="logout"
+            onclick="sair()"
+        >
+            Sair
+        </button>
+
+    </div>
+
+</nav>
+
+
+<main class="main">
+
+    <div class="welcome">
+
+        <h1>
+            Olá,
+            <span id="nomeGrande"></span>! 👋
+        </h1>
+
+        <p>
+            Gerencie as reservas dos recursos escolares.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">
+                📽️
+            </div>
+
+            <div class="card-title">
+                Data Shows hoje
+            </div>
+
+            <div
+                class="card-number"
+                id="dataShowsHoje"
+            >
+                0/5
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <div class="card-title">
+                Reservas de sala
+            </div>
+
+            <div
+                class="card-number"
+                id="salaHoje"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <div class="card-title">
+                Minhas reservas
+            </div>
+
+            <div
+                class="card-number"
+                id="minhasReservas"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📅
+            </div>
+
+            <div class="card-title">
+                Reservas hoje
+            </div>
+
+            <div
+                class="card-number"
+                id="reservasHoje"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="panel">
+
+        <h2>
+            ⚡ Acesso rápido
+        </h2>
+
+        <div class="form-grid">
 
             <button
-                class="logout"
-                onclick="sair()"
+                class="button button-primary"
+                onclick="location.href='reservas.html'"
             >
-                Sair
+                📅 Fazer uma reserva
+            </button>
+
+            <button
+                class="button button-success"
+                onclick="location.href='historico.html'"
+            >
+                📋 Ver minhas reservas
+            </button>
+
+            <button
+                class="button button-warning"
+                onclick="imprimirPagina()"
+            >
+                🖨️ Imprimir
+            </button>
+
+            <button
+                class="button button-primary"
+                onclick="exportarCSV()"
+            >
+                📥 Exportar CSV
             </button>
 
         </div>
 
-    </nav>
+    </section>
 
 
-    <main class="main">
+    <section class="panel">
 
-        <div class="welcome">
+        <h2>
+            📅 Próximas reservas
+        </h2>
 
-            <h1>
-                Olá,
-                <span id="nomeGrande"></span>! 👋
-            </h1>
+        <div
+            class="table-container"
+            id="proximasReservas"
+        ></div>
+
+    </section>
+
+
+    <section class="panel">
+
+        <h2>
+            🔔 Regras do sistema
+        </h2>
+
+        <div class="aviso">
+
+            <strong>
+                📅 Datas
+            </strong>
 
             <p>
-                Gerencie as reservas dos recursos escolares.
+                Só é possível reservar para hoje ou amanhã.
             </p>
 
         </div>
 
+        <div class="aviso">
 
-        <div class="cards">
+            <strong>
+                📽️ Data Show
+            </strong>
 
-            <div class="card">
-
-                <div class="card-icon">
-                    📽️
-                </div>
-
-                <div class="card-title">
-                    Data Shows disponíveis
-                </div>
-
-                <div class="card-number">
-                    5
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    💻
-                </div>
-
-                <div class="card-title">
-                    Sala de Informática
-                </div>
-
-                <div class="card-number">
-                    1
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    📅
-                </div>
-
-                <div class="card-title">
-                    Reservas hoje
-                </div>
-
-                <div
-                    class="card-number"
-                    id="reservasHoje"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    📋
-                </div>
-
-                <div class="card-title">
-                    Minhas reservas
-                </div>
-
-                <div
-                    class="card-number"
-                    id="minhasReservas"
-                >
-                    0
-                </div>
-
-            </div>
+            <p>
+                Cada horário permite no máximo 5 Data Shows.
+            </p>
 
         </div>
 
+        <div class="aviso">
 
-        <section class="panel">
+            <strong>
+                💻 Sala de Informática
+            </strong>
 
-            <h2>
-                📅 Minhas próximas reservas
-            </h2>
+            <p>
+                Cada horário permite somente uma reserva.
+            </p>
 
-            <div
-                class="table-container"
-                id="proximasReservas"
-            ></div>
+        </div>
 
-        </section>
+        <div class="aviso">
 
+            <strong>
+                ⏰ Intervalos
+            </strong>
 
-        <section class="panel">
+            <p>
+                Os intervalos são automaticamente bloqueados.
+            </p>
 
-            <h2>
-                🔔 Regras do sistema
-            </h2>
+        </div>
 
+    </section>
 
-            <div class="aviso">
-
-                <strong>
-                    📅 Datas
-                </strong>
-
-                <p>
-                    Só é possível reservar para hoje ou amanhã.
-                </p>
-
-            </div>
+</main>
 
 
-            <div class="aviso">
+<script src="app.js"></script>
 
-                <strong>
-                    📽️ Data Show
-                </strong>
+<script>
 
-                <p>
-                    São permitidos no máximo 5 Data Shows por horário.
-                </p>
+const usuario =
+    protegerPagina();
 
-            </div>
+if (usuario) {
 
+    document.getElementById(
+        "nomeUsuario"
+    ).textContent =
+        usuario.nick;
 
-            <div class="aviso">
+    document.getElementById(
+        "nomeGrande"
+    ).textContent =
+        usuario.nick;
 
-                <strong>
-                    💻 Sala de Informática
-                </strong>
+    if (
+        usuario.role === "admin"
+    ) {
 
-                <p>
-                    Existe apenas uma reserva por horário.
-                </p>
+        document
+            .getElementById(
+                "linkAdmin"
+            )
+            .classList.remove(
+                "hidden"
+            );
 
-            </div>
+    }
 
+    carregarPagina();
 
-            <div class="aviso">
-
-                <strong>
-                    ⏰ Intervalos
-                </strong>
-
-                <p>
-                    Não é possível realizar reservas durante os intervalos.
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
+}
 
 
-    <script src="app.js"></script>
+function carregarPagina() {
 
+    const reservas =
+        getReservas();
 
-    <script>
+    const minhas =
+        reservas.filter(
+            function(r) {
 
-        const usuario =
-            protegerPagina();
-
-
-        if (usuario) {
-
-            document.getElementById(
-                "nomeUsuario"
-            ).textContent =
-                usuario.nick;
-
-
-            document.getElementById(
-                "nomeGrande"
-            ).textContent =
-                usuario.nick;
-
-
-            if (
-                usuario.role === "admin"
-            ) {
-
-                document
-                    .getElementById("linkAdmin")
-                    .classList.remove("hidden");
+                return (
+                    r.email ===
+                    usuario.email
+                );
 
             }
+        );
+
+    const hoje =
+        getHoje();
+
+    const hojeReservas =
+        reservas.filter(
+            function(r) {
+
+                return r.data === hoje;
+
+            }
+        );
+
+    const dataShows =
+        hojeReservas.filter(
+            function(r) {
+
+                return (
+                    r.recurso ===
+                    "Data Show"
+                );
+
+            }
+        ).length;
+
+    const sala =
+        hojeReservas.filter(
+            function(r) {
+
+                return (
+                    r.recurso ===
+                    "Sala de Informática"
+                );
+
+            }
+        ).length;
+
+    document.getElementById(
+        "dataShowsHoje"
+    ).textContent =
+        `${dataShows}/5`;
+
+    document.getElementById(
+        "salaHoje"
+    ).textContent =
+        sala;
+
+    document.getElementById(
+        "minhasReservas"
+    ).textContent =
+        minhas.length;
+
+    document.getElementById(
+        "reservasHoje"
+    ).textContent =
+        hojeReservas.length;
 
 
-            const reservas =
-                getReservas();
+    const futuras =
+        minhas.filter(
+            function(r) {
+
+                return dataPermitida(
+                    r.data
+                );
+
+            }
+        );
 
 
-            const minhas =
-                reservas.filter(
+    const area =
+        document.getElementById(
+            "proximasReservas"
+        );
+
+
+    if (
+        futuras.length === 0
+    ) {
+
+        area.innerHTML =
+            "<p>Nenhuma reserva encontrada.</p>";
+
+        return;
+
+    }
+
+
+    area.innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Recurso
+                    </th>
+
+                    <th>
+                        Data
+                    </th>
+
+                    <th>
+                        Horário
+                    </th>
+
+                    <th>
+                        Ação
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${futuras.map(
                     function(r) {
 
-                        return (
-                            r.email ===
-                            usuario.email
-                        );
-
-                    }
-                );
-
-
-            const hoje =
-                getHoje();
-
-
-            const reservasHoje =
-                reservas.filter(
-                    function(r) {
-
-                        return (
-                            r.data === hoje
-                        );
-
-                    }
-                );
-
-
-            document.getElementById(
-                "minhasReservas"
-            ).textContent =
-                minhas.length;
-
-
-            document.getElementById(
-                "reservasHoje"
-            ).textContent =
-                reservasHoje.length;
-
-
-            const futuras =
-                minhas.filter(
-                    function(r) {
-
-                        return (
-                            r.data === getHoje() ||
-                            r.data === getAmanha()
-                        );
-
-                    }
-                );
-
-
-            const area =
-                document.getElementById(
-                    "proximasReservas"
-                );
-
-
-            if (
-                futuras.length === 0
-            ) {
-
-                area.innerHTML =
-                    "<p>Nenhuma reserva encontrada.</p>";
-
-            } else {
-
-                area.innerHTML = `
-
-                    <table>
-
-                        <thead>
+                        return `
 
                             <tr>
 
-                                <th>Recurso</th>
+                                <td>
+                                    ${r.recurso}
+                                </td>
 
-                                <th>Data</th>
+                                <td>
+                                    ${formatarData(r.data)}
+                                </td>
 
-                                <th>Horário</th>
+                                <td>
+                                    ${r.horario}
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        class="button button-danger"
+                                        onclick="cancelarMinhaReserva(${r.id})"
+                                    >
+                                        Cancelar
+                                    </button>
+
+                                </td>
 
                             </tr>
 
-                        </thead>
+                        `;
 
-                        <tbody>
+                    }
+                ).join("")}
 
-                            ${futuras.map(
-                                function(r) {
+            </tbody>
 
-                                    return `
+        </table>
 
-                                        <tr>
+    `;
 
-                                            <td>
-                                                ${r.recurso}
-                                            </td>
+}
 
-                                            <td>
-                                                ${r.data
-                                                    .split("-")
-                                                    .reverse()
-                                                    .join("/")}
-                                            </td>
-
-                                            <td>
-                                                ${r.horario}
-                                            </td>
-
-                                        </tr>
-
-                                    `;
-
-                                }
-                            ).join("")}
-
-                        </tbody>
-
-                    </table>
-
-                `;
-
-            }
-
-        }
-
-    </script>
+</script>
 
 </body>
 

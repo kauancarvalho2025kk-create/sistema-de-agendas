@@ -1,6 +1,6 @@
-/* =====================================
-   BANCO DE DADOS LOCAL
-===================================== */
+/* =========================================
+   BANCO LOCAL
+========================================= */
 
 function getUsuarios() {
 
@@ -40,9 +40,9 @@ function salvarReservas(reservas) {
 }
 
 
-/* =====================================
-   USUÁRIO LOGADO
-===================================== */
+/* =========================================
+   USUÁRIO
+========================================= */
 
 function getUsuarioLogado() {
 
@@ -70,22 +70,32 @@ function protegerPagina() {
 }
 
 
-/* =====================================
+/* =========================================
    DATAS
-===================================== */
+========================================= */
 
-function formatarDataISO(data) {
+function dataLocalISO(data) {
 
-    return data
-        .toISOString()
-        .split("T")[0];
+    const ano =
+        data.getFullYear();
 
+    const mes =
+        String(
+            data.getMonth() + 1
+        ).padStart(2, "0");
+
+    const dia =
+        String(
+            data.getDate()
+        ).padStart(2, "0");
+
+    return `${ano}-${mes}-${dia}`;
 }
 
 
 function getHoje() {
 
-    return formatarDataISO(
+    return dataLocalISO(
         new Date()
     );
 
@@ -101,7 +111,7 @@ function getAmanha() {
         data.getDate() + 1
     );
 
-    return formatarDataISO(data);
+    return dataLocalISO(data);
 
 }
 
@@ -116,9 +126,68 @@ function dataPermitida(data) {
 }
 
 
-/* =====================================
+function formatarData(data) {
+
+    if (!data) return "";
+
+    return data
+        .split("-")
+        .reverse()
+        .join("/");
+}
+
+
+/* =========================================
+   HORÁRIOS
+========================================= */
+
+const HORARIOS = [
+
+    "07:30 - 08:30",
+    "08:30 - 09:30",
+
+    "09:30 - 09:50",
+
+    "09:50 - 10:50",
+    "10:50 - 11:50",
+
+    "11:50 - 12:50",
+
+    "12:50 - 13:50",
+    "13:50 - 14:50",
+
+    "14:50 - 15:10",
+
+    "15:10 - 16:10",
+    "16:10 - 17:10"
+
+];
+
+
+const INTERVALOS = [
+
+    "09:30 - 09:50",
+    "11:50 - 12:50",
+    "14:50 - 15:10"
+
+];
+
+
+const HORARIOS_RESERVA =
+    HORARIOS.filter(
+        function(horario) {
+
+            return !INTERVALOS.includes(
+                horario
+            );
+
+        }
+    );
+
+
+/* =========================================
    LOGIN
-===================================== */
+========================================= */
 
 const formLogin =
     document.getElementById(
@@ -134,7 +203,6 @@ if (formLogin) {
 
             event.preventDefault();
 
-
             const email =
                 document
                     .getElementById(
@@ -144,7 +212,6 @@ if (formLogin) {
                     .trim()
                     .toLowerCase();
 
-
             const senha =
                 document
                     .getElementById(
@@ -152,10 +219,8 @@ if (formLogin) {
                     )
                     .value;
 
-
             const usuarios =
                 getUsuarios();
-
 
             const usuario =
                 usuarios.find(
@@ -169,7 +234,6 @@ if (formLogin) {
                     }
                 );
 
-
             if (!usuario) {
 
                 mostrarMensagem(
@@ -180,12 +244,10 @@ if (formLogin) {
                 return;
             }
 
-
             localStorage.setItem(
                 "usuarioLogado",
                 JSON.stringify(usuario)
             );
-
 
             window.location.href =
                 "home.html";
@@ -196,9 +258,9 @@ if (formLogin) {
 }
 
 
-/* =====================================
+/* =========================================
    CADASTRO
-===================================== */
+========================================= */
 
 const formCadastro =
     document.getElementById(
@@ -214,7 +276,6 @@ if (formCadastro) {
 
             event.preventDefault();
 
-
             const nick =
                 document
                     .getElementById(
@@ -222,7 +283,6 @@ if (formCadastro) {
                     )
                     .value
                     .trim();
-
 
             const email =
                 document
@@ -233,14 +293,12 @@ if (formCadastro) {
                     .trim()
                     .toLowerCase();
 
-
             const senha =
                 document
                     .getElementById(
                         "cadastroSenha"
                     )
                     .value;
-
 
             const confirmar =
                 document
@@ -249,10 +307,7 @@ if (formCadastro) {
                     )
                     .value;
 
-
-            if (
-                nick.length < 3
-            ) {
+            if (nick.length < 3) {
 
                 mostrarMensagem(
                     "O nick precisa ter pelo menos 3 caracteres.",
@@ -262,10 +317,7 @@ if (formCadastro) {
                 return;
             }
 
-
-            if (
-                senha.length < 6
-            ) {
+            if (senha.length < 6) {
 
                 mostrarMensagem(
                     "A senha precisa ter pelo menos 6 caracteres.",
@@ -275,10 +327,7 @@ if (formCadastro) {
                 return;
             }
 
-
-            if (
-                senha !== confirmar
-            ) {
+            if (senha !== confirmar) {
 
                 mostrarMensagem(
                     "As senhas não são iguais.",
@@ -288,24 +337,18 @@ if (formCadastro) {
                 return;
             }
 
-
             const usuarios =
                 getUsuarios();
 
-
-            const emailExiste =
+            if (
                 usuarios.some(
                     function(u) {
 
-                        return (
-                            u.email === email
-                        );
+                        return u.email === email;
 
                     }
-                );
-
-
-            if (emailExiste) {
+                )
+            ) {
 
                 mostrarMensagem(
                     "Este e-mail já está cadastrado.",
@@ -315,8 +358,7 @@ if (formCadastro) {
                 return;
             }
 
-
-            const nickExiste =
+            if (
                 usuarios.some(
                     function(u) {
 
@@ -326,10 +368,8 @@ if (formCadastro) {
                         );
 
                     }
-                );
-
-
-            if (nickExiste) {
+                )
+            ) {
 
                 mostrarMensagem(
                     "Este nick já está sendo usado.",
@@ -338,7 +378,6 @@ if (formCadastro) {
 
                 return;
             }
-
 
             const novoUsuario = {
 
@@ -354,33 +393,24 @@ if (formCadastro) {
 
             };
 
-
             usuarios.push(
                 novoUsuario
             );
 
-
             salvarUsuarios(
                 usuarios
             );
-
 
             mostrarMensagem(
                 "Conta criada com sucesso!",
                 "sucesso"
             );
 
-
             formCadastro.reset();
 
-
             setTimeout(
-                function() {
-
-                    mostrarLogin();
-
-                },
-                1200
+                mostrarLogin,
+                1000
             );
 
         }
@@ -389,9 +419,9 @@ if (formCadastro) {
 }
 
 
-/* =====================================
-   MOSTRAR LOGIN
-===================================== */
+/* =========================================
+   TROCAR TELAS
+========================================= */
 
 function mostrarLogin() {
 
@@ -405,25 +435,19 @@ function mostrarLogin() {
             "cadastroArea"
         );
 
-
     if (login && cadastro) {
-
-        cadastro.classList.add(
-            "hidden"
-        );
 
         login.classList.remove(
             "hidden"
         );
 
-    }
+        cadastro.classList.add(
+            "hidden"
+        );
 
+    }
 }
 
-
-/* =====================================
-   MOSTRAR CADASTRO
-===================================== */
 
 function mostrarCadastro() {
 
@@ -437,7 +461,6 @@ function mostrarCadastro() {
             "cadastroArea"
         );
 
-
     if (login && cadastro) {
 
         login.classList.add(
@@ -449,13 +472,12 @@ function mostrarCadastro() {
         );
 
     }
-
 }
 
 
-/* =====================================
-   MOSTRAR SENHA
-===================================== */
+/* =========================================
+   SENHA
+========================================= */
 
 function togglePassword(
     id,
@@ -465,9 +487,7 @@ function togglePassword(
     const input =
         document.getElementById(id);
 
-
     if (!input) return;
-
 
     if (
         input.type === "password"
@@ -475,22 +495,24 @@ function togglePassword(
 
         input.type = "text";
 
-        button.textContent = "🙈";
+        button.textContent =
+            "🙈";
 
     } else {
 
         input.type = "password";
 
-        button.textContent = "👁️";
+        button.textContent =
+            "👁️";
 
     }
 
 }
 
 
-/* =====================================
+/* =========================================
    MENSAGEM
-===================================== */
+========================================= */
 
 function mostrarMensagem(
     texto,
@@ -502,9 +524,7 @@ function mostrarMensagem(
             "mensagem"
         );
 
-
     if (!elemento) return;
-
 
     elemento.textContent =
         texto;
@@ -515,9 +535,64 @@ function mostrarMensagem(
 }
 
 
-/* =====================================
-   SAIR
-===================================== */
+/* =========================================
+   NOTIFICAÇÕES
+========================================= */
+
+function mostrarToast(
+    texto,
+    tipo = "success"
+) {
+
+    let container =
+        document.querySelector(
+            ".toast-container"
+        );
+
+    if (!container) {
+
+        container =
+            document.createElement(
+                "div"
+            );
+
+        container.className =
+            "toast-container";
+
+        document.body.appendChild(
+            container
+        );
+    }
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+    toast.className =
+        `toast ${tipo}`;
+
+    toast.textContent =
+        texto;
+
+    container.appendChild(
+        toast
+    );
+
+    setTimeout(
+        function() {
+
+            toast.remove();
+
+        },
+        3500
+    );
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
 
 function sair() {
 
@@ -531,42 +606,14 @@ function sair() {
 }
 
 
-/* =====================================
+/* =========================================
    ADMIN
-===================================== */
-
-function verificarAdmin() {
-
-    const usuario =
-        getUsuarioLogado();
-
-
-    if (
-        !usuario ||
-        usuario.role !== "admin"
-    ) {
-
-        window.location.href =
-            "home.html";
-
-        return false;
-    }
-
-
-    return true;
-
-}
-
-
-/* =====================================
-   ADMIN PADRÃO
-===================================== */
+========================================= */
 
 function criarAdminPadrao() {
 
     const usuarios =
         getUsuarios();
-
 
     const existe =
         usuarios.some(
@@ -579,7 +626,6 @@ function criarAdminPadrao() {
 
             }
         );
-
 
     if (!existe) {
 
@@ -597,7 +643,6 @@ function criarAdminPadrao() {
 
         });
 
-
         salvarUsuarios(
             usuarios
         );
@@ -610,9 +655,29 @@ function criarAdminPadrao() {
 criarAdminPadrao();
 
 
-/* =====================================
+function verificarAdmin() {
+
+    const usuario =
+        getUsuarioLogado();
+
+    if (
+        !usuario ||
+        usuario.role !== "admin"
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================================
    TEMA
-===================================== */
+========================================= */
 
 function abrirTemas() {
 
@@ -621,14 +686,11 @@ function abrirTemas() {
             "themeMenu"
         );
 
-
     if (!menu) return;
-
 
     menu.classList.toggle(
         "hidden"
     );
-
 }
 
 
@@ -642,18 +704,14 @@ function escolherTema(tema) {
         return;
     }
 
-
     localStorage.setItem(
         "tema",
         tema
     );
 
-
     aplicarTema();
 
-
     fecharMenuTema();
-
 }
 
 
@@ -663,7 +721,6 @@ function aplicarTema() {
         localStorage.getItem(
             "tema"
         ) || "dark";
-
 
     if (
         tema === "light"
@@ -680,7 +737,6 @@ function aplicarTema() {
         );
 
     }
-
 }
 
 
@@ -691,7 +747,6 @@ function fecharMenuTema() {
             "themeMenu"
         );
 
-
     if (menu) {
 
         menu.classList.add(
@@ -699,13 +754,8 @@ function fecharMenuTema() {
         );
 
     }
-
 }
 
-
-/* =====================================
-   CARREGAR TEMA
-===================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -716,10 +766,6 @@ document.addEventListener(
     }
 );
 
-
-/* =====================================
-   CLICAR FORA DO MENU
-===================================== */
 
 document.addEventListener(
     "click",
@@ -734,7 +780,6 @@ document.addEventListener(
             document.getElementById(
                 "themeMenu"
             );
-
 
         if (
             seletor &&
@@ -752,3 +797,251 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================
+   DISPONIBILIDADE
+========================================= */
+
+function contarReservas(
+    data,
+    horario,
+    recurso
+) {
+
+    return getReservas().filter(
+        function(r) {
+
+            return (
+                r.data === data &&
+                r.horario === horario &&
+                r.recurso === recurso
+            );
+
+        }
+    ).length;
+
+}
+
+
+function disponibilidadeDataShow(
+    data,
+    horario
+) {
+
+    return contarReservas(
+        data,
+        horario,
+        "Data Show"
+    );
+
+}
+
+
+function disponibilidadeSala(
+    data,
+    horario
+) {
+
+    return contarReservas(
+        data,
+        horario,
+        "Sala de Informática"
+    );
+
+}
+
+
+/* =========================================
+   STATUS DO DATA SHOW
+========================================= */
+
+function statusDataShow(
+    quantidade
+) {
+
+    if (quantidade >= 5) {
+
+        return {
+            texto: "5/5 - CHEIO",
+            classe: "status-cheio"
+        };
+
+    }
+
+    if (quantidade > 0) {
+
+        return {
+            texto:
+                `${quantidade}/5 - PARCIAL`,
+            classe: "status-parcial"
+        };
+
+    }
+
+    return {
+        texto: "0/5 - LIVRE",
+        classe: "status-livre"
+    };
+
+}
+
+
+/* =========================================
+   CANCELAR RESERVA
+========================================= */
+
+function cancelarMinhaReserva(
+    id
+) {
+
+    const usuario =
+        getUsuarioLogado();
+
+    if (!usuario) return;
+
+    const reservas =
+        getReservas();
+
+    const reserva =
+        reservas.find(
+            function(r) {
+
+                return r.id === id;
+
+            }
+        );
+
+    if (!reserva) {
+
+        mostrarToast(
+            "Reserva não encontrada.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (
+        reserva.email !==
+        usuario.email &&
+        usuario.role !== "admin"
+    ) {
+
+        mostrarToast(
+            "Você não pode cancelar esta reserva.",
+            "error"
+        );
+
+        return;
+    }
+
+    const confirmar =
+        confirm(
+            `Cancelar a reserva de ${reserva.recurso} em ${formatarData(reserva.data)} às ${reserva.horario}?`
+        );
+
+    if (!confirmar) return;
+
+    salvarReservas(
+        reservas.filter(
+            function(r) {
+
+                return r.id !== id;
+
+            }
+        )
+    );
+
+    mostrarToast(
+        "Reserva cancelada com sucesso.",
+        "success"
+    );
+
+    if (
+        typeof carregarPagina ===
+        "function"
+    ) {
+
+        carregarPagina();
+
+    }
+
+}
+
+
+/* =========================================
+   EXPORTAR CSV
+========================================= */
+
+function exportarCSV(
+    reservas = getReservas()
+) {
+
+    if (
+        reservas.length === 0
+    ) {
+
+        mostrarToast(
+            "Não existem reservas para exportar.",
+            "warning"
+        );
+
+        return;
+    }
+
+    let csv =
+        "Nick;E-mail;Recurso;Data;Horário\n";
+
+    reservas.forEach(
+        function(r) {
+
+            csv +=
+                `"${r.nick}";"${r.email}";"${r.recurso}";"${formatarData(r.data)}";"${r.horario}"\n`;
+
+        }
+    );
+
+    const blob =
+        new Blob(
+            ["\ufeff" + csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+    link.href =
+        url;
+
+    link.download =
+        "reservas_escolares.csv";
+
+    link.click();
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================
+   IMPRESSÃO
+========================================= */
+
+function imprimirPagina() {
+
+    window.print();
+
+}

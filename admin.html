@@ -21,505 +21,687 @@
 
 <body>
 
-    <nav class="navbar">
+<nav class="navbar">
 
-        <div class="brand">
-            🛡️ Administração
-        </div>
+    <div class="brand">
+        🛡️ Administração
+    </div>
 
+    <div class="nav-links">
 
-        <div class="nav-links">
+        <a href="home.html">
+            Início
+        </a>
 
-            <a href="home.html">
-                Início
-            </a>
+        <a href="reservas.html">
+            Agenda
+        </a>
 
-            <a href="reservas.html">
-                Agenda
-            </a>
+        <a href="historico.html">
+            Histórico
+        </a>
 
-            <a href="historico.html">
-                Histórico
-            </a>
+    </div>
 
-        </div>
+    <div class="user-area">
 
-
-        <div class="user-area">
-
-            <div class="theme-selector">
-
-                <button
-                    class="theme-button"
-                    onclick="abrirTemas()"
-                >
-                    🎨 Tema
-                </button>
-
-
-                <div
-                    id="themeMenu"
-                    class="theme-menu hidden"
-                >
-
-                    <button
-                        onclick="escolherTema('light')"
-                    >
-                        ☀️ Tema Claro
-                    </button>
-
-
-                    <button
-                        onclick="escolherTema('dark')"
-                    >
-                        🌙 Tema Escuro
-                    </button>
-
-                </div>
-
-            </div>
-
+        <div class="theme-selector">
 
             <button
-                class="logout"
-                onclick="sair()"
+                class="theme-button"
+                onclick="abrirTemas()"
             >
-                Sair
+                🎨 Tema
             </button>
 
-        </div>
+            <div
+                id="themeMenu"
+                class="theme-menu hidden"
+            >
 
-    </nav>
-
-
-    <main class="main">
-
-        <div class="welcome">
-
-            <h1>
-                🛡️ Painel Administrativo
-            </h1>
-
-            <p>
-                Gerencie usuários e reservas.
-            </p>
-
-        </div>
-
-
-        <div class="cards">
-
-            <div class="card">
-
-                <div class="card-icon">
-                    👥
-                </div>
-
-                <div class="card-title">
-                    Usuários
-                </div>
-
-                <div
-                    class="card-number"
-                    id="totalUsuarios"
+                <button
+                    onclick="escolherTema('light')"
                 >
-                    0
-                </div>
+                    ☀️ Tema Claro
+                </button>
 
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    📋
-                </div>
-
-                <div class="card-title">
-                    Reservas
-                </div>
-
-                <div
-                    class="card-number"
-                    id="totalReservas"
+                <button
+                    onclick="escolherTema('dark')"
                 >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    📽️
-                </div>
-
-                <div class="card-title">
-                    Data Shows
-                </div>
-
-                <div
-                    class="card-number"
-                    id="totalDS"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    💻
-                </div>
-
-                <div class="card-title">
-                    Sala de Informática
-                </div>
-
-                <div
-                    class="card-number"
-                    id="totalSala"
-                >
-                    0
-                </div>
+                    🌙 Tema Escuro
+                </button>
 
             </div>
 
         </div>
 
+        <button
+            class="logout"
+            onclick="sair()"
+        >
+            Sair
+        </button>
 
-        <section class="panel">
+    </div>
 
-            <h2>
-                📋 Todas as reservas
-            </h2>
-
-
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Usuário
-                            </th>
-
-                            <th>
-                                Recurso
-                            </th>
-
-                            <th>
-                                Data
-                            </th>
-
-                            <th>
-                                Horário
-                            </th>
-
-                            <th>
-                                Ação
-                            </th>
-
-                        </tr>
-
-                    </thead>
+</nav>
 
 
-                    <tbody
-                        id="tabelaReservas"
-                    ></tbody>
+<main class="main">
 
-                </table>
+    <div class="welcome">
+
+        <h1>
+            🛡️ Painel Administrativo
+        </h1>
+
+        <p>
+            Controle completo das reservas escolares.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">
+                👥
+            </div>
+
+            <div class="card-title">
+                Usuários
+            </div>
+
+            <div
+                class="card-number"
+                id="totalUsuarios"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <div class="card-title">
+                Reservas
+            </div>
+
+            <div
+                class="card-number"
+                id="totalReservas"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📽️
+            </div>
+
+            <div class="card-title">
+                Data Shows
+            </div>
+
+            <div
+                class="card-number"
+                id="totalDS"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <div class="card-title">
+                Sala
+            </div>
+
+            <div
+                class="card-number"
+                id="totalSala"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <section class="panel no-print">
+
+        <h2>
+            🔎 Filtros
+        </h2>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>
+                    Pesquisar
+                </label>
+
+                <input
+                    id="pesquisa"
+                    placeholder="Nick, e-mail ou recurso..."
+                >
 
             </div>
 
-        </section>
 
+            <div class="form-group">
 
-        <section class="panel">
+                <label>
+                    Data
+                </label>
 
-            <h2>
-                👥 Usuários cadastrados
-            </h2>
-
-
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Nick
-                            </th>
-
-                            <th>
-                                E-mail
-                            </th>
-
-                            <th>
-                                Tipo
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody
-                        id="tabelaUsuarios"
-                    ></tbody>
-
-                </table>
+                <input
+                    type="date"
+                    id="filtroData"
+                >
 
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <script src="app.js"></script>
+        <button
+            class="button button-primary"
+            style="margin-top:20px"
+            onclick="carregarAdmin()"
+        >
+            🔎 Pesquisar
+        </button>
 
 
-    <script>
-
-        const usuario =
-            protegerPagina();
-
-
-        if (
-            usuario &&
-            usuario.role === "admin"
-        ) {
-
-            carregarAdmin();
-
-        }
+        <button
+            class="button button-warning"
+            style="margin-top:20px"
+            onclick="limparFiltros()"
+        >
+            Limpar
+        </button>
 
 
-        function carregarAdmin() {
-
-            if (
-                !verificarAdmin()
-            ) {
-
-                return;
-
-            }
+        <button
+            class="button button-success"
+            style="margin-top:20px"
+            onclick="exportarCSV(reservasFiltradas())"
+        >
+            📥 Exportar CSV
+        </button>
 
 
-            const usuarios =
-                getUsuarios();
+        <button
+            class="button button-primary"
+            style="margin-top:20px"
+            onclick="imprimirPagina()"
+        >
+            🖨️ Imprimir
+        </button>
+
+    </section>
 
 
-            const reservas =
-                getReservas();
+    <section class="panel">
 
+        <h2>
+            📋 Todas as reservas
+        </h2>
 
-            document.getElementById(
-                "totalUsuarios"
-            ).textContent =
-                usuarios.length;
+        <div class="table-container">
 
+            <table>
 
-            document.getElementById(
-                "totalReservas"
-            ).textContent =
-                reservas.length;
-
-
-            document.getElementById(
-                "totalDS"
-            ).textContent =
-                reservas.filter(
-                    function(r) {
-
-                        return (
-                            r.recurso ===
-                            "Data Show"
-                        );
-
-                    }
-                ).length;
-
-
-            document.getElementById(
-                "totalSala"
-            ).textContent =
-                reservas.filter(
-                    function(r) {
-
-                        return (
-                            r.recurso ===
-                            "Sala de Informática"
-                        );
-
-                    }
-                ).length;
-
-
-            const tabelaReservas =
-                document.getElementById(
-                    "tabelaReservas"
-                );
-
-
-            if (
-                reservas.length === 0
-            ) {
-
-                tabelaReservas.innerHTML = `
+                <thead>
 
                     <tr>
 
-                        <td colspan="5">
-                            Nenhuma reserva encontrada.
+                        <th>
+                            Usuário
+                        </th>
+
+                        <th>
+                            E-mail
+                        </th>
+
+                        <th>
+                            Recurso
+                        </th>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Horário
+                        </th>
+
+                        <th>
+                            Ação
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="tabelaReservas"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section class="panel">
+
+        <h2>
+            👥 Usuários cadastrados
+        </h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Nick
+                        </th>
+
+                        <th>
+                            E-mail
+                        </th>
+
+                        <th>
+                            Tipo
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="tabelaUsuarios"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="app.js"></script>
+
+<script>
+
+const usuario =
+    protegerPagina();
+
+
+if (
+    usuario &&
+    usuario.role === "admin"
+) {
+
+    carregarAdmin();
+
+}
+
+
+function reservasFiltradas() {
+
+    let reservas =
+        getReservas();
+
+
+    const pesquisa =
+        document.getElementById(
+            "pesquisa"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const data =
+        document.getElementById(
+            "filtroData"
+        ).value;
+
+
+    if (pesquisa) {
+
+        reservas =
+            reservas.filter(
+                function(r) {
+
+                    return (
+
+                        r.nick
+                            .toLowerCase()
+                            .includes(pesquisa)
+
+                        ||
+
+                        r.email
+                            .toLowerCase()
+                            .includes(pesquisa)
+
+                        ||
+
+                        r.recurso
+                            .toLowerCase()
+                            .includes(pesquisa)
+
+                    );
+
+                }
+            );
+
+    }
+
+
+    if (data) {
+
+        reservas =
+            reservas.filter(
+                function(r) {
+
+                    return (
+                        r.data ===
+                        data
+                    );
+
+                }
+            );
+
+    }
+
+
+    return reservas;
+
+}
+
+
+function carregarAdmin() {
+
+    if (
+        !verificarAdmin()
+    ) {
+
+        return;
+
+    }
+
+
+    const usuarios =
+        getUsuarios();
+
+
+    const reservas =
+        reservasFiltradas();
+
+
+    document.getElementById(
+        "totalUsuarios"
+    ).textContent =
+        usuarios.length;
+
+
+    document.getElementById(
+        "totalReservas"
+    ).textContent =
+        reservas.length;
+
+
+    document.getElementById(
+        "totalDS"
+    ).textContent =
+        reservas.filter(
+            function(r) {
+
+                return (
+                    r.recurso ===
+                    "Data Show"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "totalSala"
+    ).textContent =
+        reservas.filter(
+            function(r) {
+
+                return (
+                    r.recurso ===
+                    "Sala de Informática"
+                );
+
+            }
+        ).length;
+
+
+    const tabela =
+        document.getElementById(
+            "tabelaReservas"
+        );
+
+
+    if (
+        reservas.length === 0
+    ) {
+
+        tabela.innerHTML = `
+
+            <tr>
+
+                <td colspan="6">
+                    Nenhuma reserva encontrada.
+                </td>
+
+            </tr>
+
+        `;
+
+    } else {
+
+        tabela.innerHTML =
+            reservas.map(
+                function(r) {
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${r.nick}
+                            </td>
+
+                            <td>
+                                ${r.email}
+                            </td>
+
+                            <td>
+                                ${r.recurso}
+                            </td>
+
+                            <td>
+                                ${formatarData(r.data)}
+                            </td>
+
+                            <td>
+                                ${r.horario}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="button button-danger"
+                                    onclick="cancelarReservaAdmin(${r.id})"
+                                >
+                                    Cancelar
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    const tabelaUsuarios =
+        document.getElementById(
+            "tabelaUsuarios"
+        );
+
+
+    tabelaUsuarios.innerHTML =
+        usuarios.map(
+            function(u) {
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            ${u.nick}
+                        </td>
+
+                        <td>
+                            ${u.email}
+                        </td>
+
+                        <td>
+                            ${
+                                u.role === "admin"
+                                ? "Administrador"
+                                : "Professor"
+                            }
                         </td>
 
                     </tr>
 
                 `;
 
-            } else {
+            }
+        ).join("");
 
-                tabelaReservas.innerHTML =
-                    reservas.map(
-                        function(r) {
+}
 
-                            return `
 
-                                <tr>
+function cancelarReservaAdmin(
+    id
+) {
 
-                                    <td>
-                                        ${r.nick}
-                                    </td>
+    const reserva =
+        getReservas().find(
+            function(r) {
 
-                                    <td>
-                                        ${r.recurso}
-                                    </td>
-
-                                    <td>
-                                        ${r.data
-                                            .split("-")
-                                            .reverse()
-                                            .join("/")}
-                                    </td>
-
-                                    <td>
-                                        ${r.horario}
-                                    </td>
-
-                                    <td>
-
-                                        <button
-                                            class="button button-danger"
-                                            onclick="cancelarReserva(${r.id})"
-                                        >
-                                            Cancelar
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                            `;
-
-                        }
-                    ).join("");
+                return r.id === id;
 
             }
+        );
 
 
-            const tabelaUsuarios =
-                document.getElementById(
-                    "tabelaUsuarios"
-                );
+    if (!reserva) {
+
+        mostrarToast(
+            "Reserva não encontrada.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
-            tabelaUsuarios.innerHTML =
-                usuarios.map(
-                    function(u) {
-
-                        return `
-
-                            <tr>
-
-                                <td>
-                                    ${u.nick}
-                                </td>
-
-                                <td>
-                                    ${u.email}
-                                </td>
-
-                                <td>
-                                    ${
-                                        u.role === "admin"
-                                        ? "Administrador"
-                                        : "Professor"
-                                    }
-                                </td>
-
-                            </tr>
-
-                        `;
-
-                    }
-                ).join("");
-
-        }
+    const confirmar =
+        confirm(
+            `Cancelar a reserva de ${reserva.nick}?\n\n${reserva.recurso}\n${formatarData(reserva.data)}\n${reserva.horario}`
+        );
 
 
-        function cancelarReserva(id) {
-
-            const confirmar =
-                confirm(
-                    "Deseja realmente cancelar esta reserva?"
-                );
+    if (!confirmar) return;
 
 
-            if (!confirmar) {
+    const reservas =
+        getReservas();
 
-                return;
+
+    salvarReservas(
+        reservas.filter(
+            function(r) {
+
+                return r.id !== id;
 
             }
+        )
+    );
 
 
-            const reservas =
-                getReservas();
+    mostrarToast(
+        "Reserva cancelada.",
+        "success"
+    );
 
 
-            const novasReservas =
-                reservas.filter(
-                    function(r) {
+    carregarAdmin();
 
-                        return (
-                            r.id !== id
-                        );
-
-                    }
-                );
+}
 
 
-            salvarReservas(
-                novasReservas
-            );
+function limparFiltros() {
+
+    document.getElementById(
+        "pesquisa"
+    ).value = "";
 
 
-            carregarAdmin();
+    document.getElementById(
+        "filtroData"
+    ).value = "";
 
-        }
 
-    </script>
+    carregarAdmin();
+
+}
+
+</script>
 
 </body>
 
